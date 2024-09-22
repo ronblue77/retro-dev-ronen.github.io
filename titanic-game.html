@@ -52,14 +52,23 @@
             try {
                 updateStatus('js-dos ready. Loading game files...');
                 
+                // Create directories
+                await fs.createDirectory("/GAMES");
+                await fs.createDirectory("/GAMES/TITANIC");
+
+                // Load TITANIC.BAS
                 updateStatus('Loading TITANIC.BAS...');
-                await fs.createFile("TITANIC.BAS", await (await fetch("GAMES/TITANIC/TITANIC.BAS")).arrayBuffer());
+                await fs.createFile("/GAMES/TITANIC/TITANIC.BAS", await (await fetch("GAMES/TITANIC/TITANIC.BAS")).arrayBuffer());
                 
+                // Load GWBASIC.EXE
                 updateStatus('Loading GWBASIC.EXE...');
-                await fs.createFile("GWBASIC.EXE", await (await fetch("GWBASIC.EXE")).arrayBuffer());
+                await fs.createFile("/GWBASIC.EXE", await (await fetch("GWBASIC.EXE")).arrayBuffer());
                 
+                // Create a batch file to run the game
+                await fs.createFile("RUN.BAT", "C:\GWBASIC.EXE C:\GAMES\TITANIC\TITANIC.BAS");
+
                 updateStatus('Files loaded. Starting the game...');
-                await main(["-c", "GWBASIC.EXE TITANIC.BAS"]);
+                await main(["-c", "RUN.BAT"]);
                 
                 updateStatus('Game is running. Enjoy!');
             } catch (error) {
