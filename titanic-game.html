@@ -51,15 +51,11 @@
         }).ready(async (fs, main) => {
             try {
                 updateStatus('js-dos ready. Loading game files...');
-                
-                // Create directories
-                await fs.createDirectory("/GAMES");
-                await fs.createDirectory("/GAMES/TITANIC");
 
                 // Load TITANIC.BAS
                 updateStatus('Loading TITANIC.BAS...');
                 const titanicContent = await (await fetch("GAMES/TITANIC/TITANIC.BAS")).text();
-                await fs.writeFile("/GAMES/TITANIC/TITANIC.BAS", titanicContent);
+                await fs.createFile("/GAMES/TITANIC/TITANIC.BAS", titanicContent);
                 console.log("TITANIC.BAS content:", titanicContent);
                 
                 // Load GWBASIC.EXE
@@ -78,7 +74,7 @@
                     IF ERRORLEVEL 1 ECHO Error occurred while running the game: %ERRORLEVEL%
                     PAUSE
                 `;
-                await fs.writeFile("RUN.BAT", batchContent);
+                await fs.createFile("RUN.BAT", batchContent);
                 console.log("RUN.BAT content:", batchContent);
 
                 updateStatus('Files loaded. Starting the game...');
