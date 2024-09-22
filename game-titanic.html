@@ -12,10 +12,14 @@
             color: #0f0;
             line-height: 1.6;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 90%;
+            width: 1000px;
             margin: 0 auto;
             border: 2px solid #0f0;
             padding: 20px;
@@ -48,24 +52,36 @@
             vertical-align: middle;
         }
 
-        iframe {
-            display: block;
-            margin: 0 auto;
-            align-items: center;
-            size: 100%;
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            margin-bottom: 20px;
+        }
 
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     </style>
 </head>
-<iframe src="https://archive.org/embed/titanic_202409" width="560" height="384" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
-<body></body>
+
+<body>
     <div class="container">
         <h1>Welcome to <span class="blink">GWBASIC GAME TITANIC</span></h1>
         <p>Play TITANIC GW-BASIC Game in Archive.org Website dosbox Emulation</p>
+        <div class="iframe-container">
+            <iframe src="https://archive.org/embed/titanic_202409" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
+        </div>
         <div id="visit-counter">
             Visitor Count:
             <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1071472/t/5"></script>
         </div>
     </div>
+</body>
 
 </html>
