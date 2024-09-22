@@ -11,19 +11,11 @@
             flex-direction: column;
             align-items: center;
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
         }
         #dosbox-container {
             width: 960px;
             height: 600px;
             margin: 20px auto;
-            border: 2px solid #333;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         #jsdos-canvas {
             width: 100%;
@@ -33,9 +25,6 @@
             text-align: center;
             font-size: 18px;
             margin-top: 20px;
-            padding: 10px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
         }
     </style>
 </head>
@@ -69,23 +58,8 @@
                 updateStatus('Loading GWBASIC.EXE...');
                 await fs.createFile("GWBASIC.EXE", await (await fetch("GWBASIC.EXE")).arrayBuffer());
                 
-                updateStatus('Creating DOSBox configuration...');
-                await fs.createFile("dosbox.conf", `
-                    [dosbox]
-                    machine=svga_s3
-                    memsize=16
-
-                    [cpu]
-                    core=normal
-                    cputype=pentium
-                    cycles=max
-
-                    [autoexec]
-                    GWBASIC.EXE /f:4096 /s:256 TITANIC.BAS
-                `);
-                
                 updateStatus('Files loaded. Starting the game...');
-                await main(["-conf", "dosbox.conf"]);
+                await main(["-c", "GWBASIC.EXE TITANIC.BAS"]);
                 
                 updateStatus('Game is running. Enjoy!');
             } catch (error) {
