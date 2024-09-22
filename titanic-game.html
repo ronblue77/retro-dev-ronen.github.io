@@ -58,8 +58,23 @@
                 updateStatus('Loading GWBASIC.EXE...');
                 await fs.createFile("GWBASIC.EXE", await (await fetch("GWBASIC.EXE")).arrayBuffer());
                 
+                updateStatus('Creating DOSBox configuration...');
+                await fs.createFile("dosbox.conf", `
+                    [dosbox]
+                    machine=svga_s3
+                    memsize=16
+
+                    [cpu]
+                    core=normal
+                    cputype=pentium
+                    cycles=max
+
+                    [autoexec]
+                    GWBASIC.EXE TITANIC.BAS
+                `);
+                
                 updateStatus('Files loaded. Starting the game...');
-                await main(["-c", "GWBASIC.EXE TITANIC.BAS"]);
+                await main(["-conf", "dosbox.conf"]);
                 
                 updateStatus('Game is running. Enjoy!');
             } catch (error) {
