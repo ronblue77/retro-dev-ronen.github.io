@@ -54,8 +54,8 @@
 
                 const ci = await main(["-c", "mount c ."]);
 
-                await ci.mount("c:/GAMES/TITANIC/TITANIC.BAS", "GAMES/TITANIC/TITANIC.BAS");
-                await ci.mount("c:/GWBASIC.EXE", "GWBASIC.EXE");
+                await ci.mount("GAMES/TITANIC/TITANIC.BAS", "GAMES/TITANIC/TITANIC.BAS");
+                await ci.mount("GWBASIC.EXE", "GWBASIC.EXE");
 
                 updateStatus('Files mounted. Starting the game...');
 
