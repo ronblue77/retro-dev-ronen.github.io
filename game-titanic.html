@@ -63,9 +63,25 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 800px;
-            height: 600px;
+            width: 100%;
+            height: 100%;
             border: none;
+        }
+
+        #fullscreen-btn {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            background-color: #0f0;
+            color: #000;
+            border: none;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+        }
+
+        #fullscreen-btn:hover {
+            background-color: #0ff;
         }
     </style>
 </head>
@@ -75,13 +91,39 @@
         <h1>Welcome to <span class="blink">GWBASIC GAME TITANIC</span></h1>
         <p>Play TITANIC GW-BASIC Game in Archive.org Website dosbox Emulation</p>
         <div class="iframe-container">
-            <iframe src="https://archive.org/embed/titanic_202409" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" edgeallowfillscreen="true" allowfullscreen></iframe>
+            <iframe id="game-iframe" src="https://archive.org/embed/titanic_202409" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
         </div>
+        <button id="fullscreen-btn">Toggle Full Screen</button>
         <div id="visit-counter">
             Visitor Count:
             <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1071472/t/5"></script>
         </div>
     </div>
+
+    <script>
+        const iframe = document.getElementById('game-iframe');
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+        fullscreenBtn.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                if (iframe.requestFullscreen) {
+                    iframe.requestFullscreen();
+                } else if (iframe.webkitRequestFullscreen) { /* Safari */
+                    iframe.webkitRequestFullscreen();
+                } else if (iframe.msRequestFullscreen) { /* IE11 */
+                    iframe.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) { /* Safari */
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { /* IE11 */
+                    document.msExitFullscreen();
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
