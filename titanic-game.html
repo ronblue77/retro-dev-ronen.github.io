@@ -60,20 +60,26 @@
                 updateStatus('Loading TITANIC.BAS...');
                 const titanicContent = await (await fetch("GAMES/TITANIC/TITANIC.BAS")).text();
                 await fs.writeFile("/GAMES/TITANIC/TITANIC.BAS", titanicContent);
+                console.log("TITANIC.BAS content:", titanicContent);
                 
                 // Load GWBASIC.EXE
                 updateStatus('Loading GWBASIC.EXE...');
                 await fs.createFile("/GWBASIC.EXE", await (await fetch("GWBASIC.EXE")).arrayBuffer());
                 
                 // Create a batch file to run the game
-                await fs.writeFile("RUN.BAT", `
-                    @echo off
+                const batchContent = `
+                    @echo on
                     C:
                     CD \\GAMES\\TITANIC
+                    ECHO Current directory:
+                    DIR
                     ECHO Running TITANIC.BAS...
                     C:\\GWBASIC.EXE TITANIC.BAS
-                    IF ERRORLEVEL 1 ECHO Error occurred while running the game
-                `);
+                    IF ERRORLEVEL 1 ECHO Error occurred while running the game: %ERRORLEVEL%
+                    PAUSE
+                `;
+                await fs.writeFile("RUN.BAT", batchContent);
+                console.log("RUN.BAT content:", batchContent);
 
                 updateStatus('Files loaded. Starting the game...');
                 const ci = await main(["-c", "RUN.BAT"]);
@@ -82,7 +88,7 @@
                     console.log("DOSBox output:", message);
                 });
 
-                updateStatus('Game is running. Check console for any error messages.');
+                updateStatus('Game should be running. Check console for messages.');
             } catch (error) {
                 console.error('Error:', error);
                 updateStatus('Error loading game. Check console for details.');
