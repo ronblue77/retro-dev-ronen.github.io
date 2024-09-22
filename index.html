@@ -28,12 +28,15 @@
         @keyframes blinker {
             50% { opacity: 0; }
         }
-        #visitor-count {
+        #visit-counter {
             text-align: center;
             font-size: 1.2em;
             margin-top: 20px;
             padding: 10px;
             border: 1px dashed #0f0;
+        }
+        #visit-counter img {
+            vertical-align: middle;
         }
     </style>
 </head>
@@ -49,30 +52,9 @@
             <li>Tech musings from a bygone era</li>
         </ul>
         <p>Let's journey back to the future of coding together!</p>
-        <div id="visitor-count">Visitors: <span id="count">Loading...</span></div>
+        <div id="visit-counter">
+            Visitor Count: <img src="https://hitcounter.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fronblue77.github.io/retro-dev-ronen.github.io/" alt="Visitor Count">
+        </div>
     </div>
-
-    <script>
-        // Function to format the count with leading zeros
-        function formatCount(count) {
-            return count.toString().padStart(5, '0');
-        }
-
-        // Function to update the visitor count
-        function updateVisitorCount() {
-            fetch('https://api.countapi.xyz/hit/retro-dev-ronen.github.io/visits')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('count').textContent = formatCount(data.value);
-                })
-                .catch(error => {
-                    console.error('Error fetching visitor count:', error);
-                    document.getElementById('count').textContent = 'Error';
-                });
-        }
-
-        // Call the function when the page loads
-        window.onload = updateVisitorCount;
-    </script>
 </body>
 </html>
