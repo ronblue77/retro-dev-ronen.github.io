@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TITANIC GW-BASIC Game</title>
+    <script src="https://js-dos.com/6.22/current/js-dos.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+        #dosbox-container {
+            width: 960px;
+            height: 600px;
+            margin: 20px auto;
+        }
+        #jsdos-canvas {
+            width: 100%;
+            height: 100%;
+        }
+        #status {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>TITANIC GW-BASIC Game</h1>
+    <div id="dosbox-container">
+        <canvas id="jsdos-canvas" width="960" height="600"></canvas>
+    </div>
+    <div id="status">Initializing...</div>
+    <script>
+        const statusElement = document.getElementById('status');
+        
+        function updateStatus(message) {
+            statusElement.textContent = message;
+            console.log(message);
+        }
+
+        updateStatus('Loading js-dos...');
+        Dos(document.getElementById("jsdos-canvas"), {
+            wdosboxUrl: "https://js-dos.com/6.22/current/wdosbox.js",
+            onprogress: (stage, total, loaded) => {
+                updateStatus(`Loading ${stage}: ${Math.floor(loaded / total * 100)}%`);
+            }
+        }).ready(async (fs, main) => {
+            try {
+                updateStatus('js-dos ready. Loading game files...');
+                
+                updateStatus('Loading TITANIC.BAS...');
+                await fs.createFile("TITANIC.BAS", await (await fetch("GAMES/TITANIC/TITANIC.BAS")).arrayBuffer());
+                
+                updateStatus('Loading GWBASIC.EXE...');
+                await fs.createFile("GWBASIC.EXE", await (await fetch("GWBASIC.EXE")).arrayBuffer());
+                
+                updateStatus('Files loaded. Starting the game...');
+                await main(["-c", "GWBASIC.EXE TITANIC.BAS"]);
+                
+                updateStatus('Game is running. Enjoy!');
+            } catch (error) {
+                console.error('Error:', error);
+                updateStatus('Error loading game. Check console for details.');
+            }
+        });
+    </script>
+</body>
+</html>
