@@ -34,8 +34,10 @@
         <canvas id="jsdos-canvas" width="960" height="600"></canvas>
     </div>
     <div id="status">Initializing...</div>
+    <button id="startButton" style="display: none;">Start Game</button>
     <script>
         const statusElement = document.getElementById('status');
+        const startButton = document.getElementById('startButton');
         
         function updateStatus(message) {
             statusElement.textContent = message;
@@ -50,22 +52,25 @@
             }
         }).ready(async (fs, main) => {
             try {
-                updateStatus('js-dos ready. Mounting game files...');
+                updateStatus('js-dos ready. Click "Start Game" to begin.');
+                startButton.style.display = 'block';
+                
+                startButton.onclick = async () => {
+                    updateStatus('Mounting game files...');
+                    
+                    await fs.createFile("GAMES/TITANIC/TITANIC.BAS", await fetch("GAMES/TITANIC/TITANIC.BAS").then(r => r.arrayBuffer()));
+                    await fs.createFile("GWBASIC.EXE", await fetch("GWBASIC.EXE").then(r => r.arrayBuffer()));
 
-                const ci = await main(["-c", "mount c ."]);
+                    updateStatus('Files mounted. Starting the game...');
 
-                await ci.mount("GAMES/TITANIC/TITANIC.BAS", "GAMES/TITANIC/TITANIC.BAS");
-                await ci.mount("GWBASIC.EXE", "GWBASIC.EXE");
+                    const ci = await main(["-c", "mount c .", "-c", "c:", "-c", "GWBASIC.EXE C:\\GAMES\\TITANIC\\TITANIC.BAS"]);
 
-                updateStatus('Files mounted. Starting the game...');
+                    ci.events().onStdout((message) => {
+                        console.log("DOSBox output:", message);
+                    });
 
-                await ci.run("GWBASIC.EXE", ["C:\\GAMES\\TITANIC\\TITANIC.BAS"]);
-
-                ci.events().onStdout((message) => {
-                    console.log("DOSBox output:", message);
-                });
-
-                updateStatus('Game should be running. Check console for messages.');
+                    updateStatus('Game should be running. Check dosbox for game.');
+                };
             } catch (error) {
                 console.error('Error:', error);
                 updateStatus('Error loading game. Check console for details.');
