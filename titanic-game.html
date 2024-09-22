@@ -50,12 +50,12 @@
             onprogress: (stage, total, loaded) => {
                 updateStatus(`Loading ${stage}: ${Math.floor(loaded / total * 100)}%`);
             }
-        }).ready(async (fs, main) => {
-            try {
-                updateStatus('js-dos ready. Click "Start Game" to begin.');
-                startButton.style.display = 'block';
-                
-                startButton.onclick = async () => {
+        }).ready((fs, main) => {
+            updateStatus('js-dos ready. Click "Start Game" to begin.');
+            startButton.style.display = 'block';
+            
+            startButton.onclick = async () => {
+                try {
                     updateStatus('Mounting game files...');
                     
                     await fs.createFile("GAMES/TITANIC/TITANIC.BAS", await fetch("GAMES/TITANIC/TITANIC.BAS").then(r => r.arrayBuffer()));
@@ -65,16 +65,17 @@
 
                     const ci = await main(["-c", "mount c .", "-c", "c:", "-c", "GWBASIC.EXE C:\\GAMES\\TITANIC\\TITANIC.BAS"]);
 
-                    ci.events().onStdout((message) => {
+                    // Use the new way to capture stdout
+                    ci.stdout.listen((message) => {
                         console.log("DOSBox output:", message);
                     });
 
                     updateStatus('Game should be running. Check dosbox for game.');
-                };
-            } catch (error) {
-                console.error('Error:', error);
-                updateStatus('Error loading game. Check console for details.');
-            }
+                } catch (error) {
+                    console.error('Error:', error);
+                    updateStatus('Error loading game. Check console for details.');
+                }
+            };
         });
     </script>
 </body>
