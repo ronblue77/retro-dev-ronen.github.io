@@ -50,36 +50,17 @@
             }
         }).ready(async (fs, main) => {
             try {
-                updateStatus('js-dos ready. Loading game files...');
+                updateStatus('js-dos ready. Mounting game files...');
 
-                // Load TITANIC.BAS
-                updateStatus('Loading TITANIC.BAS...');
-                const titanicContent = await (await fetch("GAMES/TITANIC/TITANIC.BAS")).text();
-                await fs.createFile("/GAMES/TITANIC/TITANIC.BAS", titanicContent);
-                console.log("TITANIC.BAS content:", titanicContent);
-                
-                // Load GWBASIC.EXE
-                updateStatus('Loading GWBASIC.EXE...');
-                await fs.createFile("/GWBASIC.EXE", await (await fetch("GWBASIC.EXE")).arrayBuffer());
-                
-                // Create a batch file to run the game
-                const batchContent = `
-                    @echo on
-                    C:
-                    CD \\GAMES\\TITANIC
-                    ECHO Current directory:
-                    DIR
-                    ECHO Running TITANIC.BAS...
-                    C:\\GWBASIC.EXE TITANIC.BAS
-                    IF ERRORLEVEL 1 ECHO Error occurred while running the game: %ERRORLEVEL%
-                    PAUSE
-                `;
-                await fs.createFile("RUN.BAT", batchContent);
-                console.log("RUN.BAT content:", batchContent);
+                const ci = await main(["-c", "mount c ."]);
 
-                updateStatus('Files loaded. Starting the game...');
-                const ci = await main(["-c", "RUN.BAT"]);
-                
+                await ci.mount("c:/GAMES/TITANIC/TITANIC.BAS", "GAMES/TITANIC/TITANIC.BAS");
+                await ci.mount("c:/GWBASIC.EXE", "GWBASIC.EXE");
+
+                updateStatus('Files mounted. Starting the game...');
+
+                await ci.run("GWBASIC.EXE", ["C:\\GAMES\\TITANIC\\TITANIC.BAS"]);
+
                 ci.events().onStdout((message) => {
                     console.log("DOSBox output:", message);
                 });
