@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro Dev Ronen - GWBAAIC GAME TITANIC</title>
+    <title>TITANIC GW-BASIC Game - Retro Dev Ronen</title>
     <style>
         body {
             font-family: 'Courier New', monospace;
@@ -12,34 +11,53 @@
             color: #0f0;
             line-height: 1.6;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .container {
-            max-width: 90%;
-            width: 1000px;
-            margin: 0 auto;
-            border: 2px solid #0f0;
-            padding: 20px;
-        }
-
-        h1 {
-            color: #0ff;
             text-align: center;
         }
-
+        h1 {
+            color: #0ff;
+        }
         .blink {
             animation: blinker 1s linear infinite;
         }
-
         @keyframes blinker {
-            50% {
-                opacity: 0;
-            }
+            50% { opacity: 0; }
         }
-
+        .game-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #0f0;
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em;
+            border: 2px solid #0ff;
+            transition: all 0.3s ease;
+        }
+        .game-link:hover {
+            background-color: #0ff;
+            color: #000;
+            transform: scale(1.05);
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #0f0;
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            background-color: #0ff;
+        }
+        .instructions {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px dashed #0f0;
+            text-align: left;
+        }
         #visit-counter {
             text-align: center;
             font-size: 1.2em;
@@ -47,83 +65,33 @@
             padding: 10px;
             border: 1px dashed #0f0;
         }
-
         #visit-counter img {
             vertical-align: middle;
         }
-
-        .iframe-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            margin-bottom: 20px;
-        }
-
-        iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        #fullscreen-btn {
-            display: block;
-            margin: 10px auto;
-            padding: 10px 20px;
-            background-color: #0f0;
-            color: #000;
-            border: none;
-            cursor: pointer;
-            font-family: 'Courier New', monospace;
-            font-size: 1em;
-        }
-
-        #fullscreen-btn:hover {
-            background-color: #0ff;
-        }
     </style>
 </head>
-
 <body>
-    <div class="container">
-        <h1>Welcome to <span class="blink">GWBASIC GAME TITANIC</span></h1>
-        <p>Play TITANIC GW-BASIC Game in Archive.org Website dosbox Emulation</p>
-        <div class="iframe-container">
-            <iframe id="game-iframe" src="https://archive.org/embed/titanic_202409?output=embed&parameters=-fullscreen%20-exit" height="800" width="600" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen allow="fullscreen"></iframe>
-        </div>
-        <button id="fullscreen-btn">Toggle Full Screen</button>
-        <div id="visit-counter">
-            Visitor Count:
-            <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1071472/t/5"></script>
-        </div>
+    <h1>Welcome to <span class="blink">TITANIC GW-BASIC Game</span></h1>
+    <p>Experience the nostalgia of GW-BASIC gaming with this classic game!</p>
+    
+    <a href="https://archive.org/details/titanic_202409" target="_blank" class="game-link">Play TITANIC on Archive.org</a>
+    
+    <div class="instructions">
+        <h2>How to Play:</h2>
+        <ol>
+            <li>Click the "Play TITANIC on Archive.org" button above.</li>
+            <li>On the Archive.org page, click the "Play" button to start the emulator.</li>
+            <li>Once the emulator loads, you can use your keyboard to interact with the game.</li>
+            <li>To exit fullscreen or return to this page, use your browser's back button.</li>
+        </ol>
+        <p>Note: Playing on Archive.org ensures full keyboard compatibility and the best gaming experience.</p>
+    </div>
+    
+    <div id="visit-counter">
+        Visitor Count:
+        <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1071472/t/5"></script>
     </div>
 
-    <script>
-        const iframe = document.getElementById('game-iframe');
-        const fullscreenBtn = document.getElementById('fullscreen-btn');
-
-        fullscreenBtn.addEventListener('click', () => {
-            if (!document.fullscreenElement) {
-                if (iframe.requestFullscreen) {
-                    iframe.requestFullscreen();
-                } else if (iframe.webkitRequestFullscreen) { /* Safari */
-                    iframe.webkitRequestFullscreen();
-                } else if (iframe.msRequestFullscreen) { /* IE11 */
-                    iframe.msRequestFullscreen();
-                }
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) { /* Safari */
-                    document.webkitExitFullscreen();
-                } else if (document.msExitFullscreen) { /* IE11 */
-                    document.msExitFullscreen();
-                }
-            }
-        });
-    </script>
+    <a href="index.html" class="back-link">Back to Home</a>
 </body>
-
 </html>
