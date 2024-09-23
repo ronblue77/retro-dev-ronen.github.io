@@ -13,7 +13,7 @@
             padding: 20px;
             text-align: center;
         }
-        h1 {
+        h1, h2 {
             color: #0ff;
         }
         .game-link {
@@ -45,25 +45,71 @@
         .back-link:hover {
             background-color: #0ff;
         }
-        .instructions {
-            max-width: 600px;
+        .content {
+            max-width: 800px;
             margin: 20px auto;
             padding: 20px;
             border: 1px dashed #0f0;
             text-align: left;
         }
+        .screenshots {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .screenshot {
+            width: 45%;
+            margin-bottom: 20px;
+        }
+        .screenshot img {
+            width: 100%;
+            border: 2px solid #0f0;
+        }
+        .screenshot p {
+            text-align: center;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
     <h1>THE HOSTEL GW-BASIC Game</h1>
-    <p>Experience the nostalgia of GW-BASIC gaming with this classic game!</p>
     
     <a href="https://archive.org/details/hostel_202409" target="_blank" class="game-link">Play THE HOSTEL on Archive.org</a>
     
-    <div class="instructions">
-        <h2>How to Play:</h2>
+    <div class="content">
+        <h2>Game Description</h2>
+        <p>THE HOSTEL is a gripping GW-BASIC text adventure game divided into two thrilling parts:</p>
+        
+        <h3>Part One: The Mental Hostel</h3>
+        <p>You find yourself thrown into a sinister mental hostel, condemned to spend your life there. Your mission is clear: find a way out at all costs. This place is not just a hospital; it's a sanity and health killer. The other residents serve as a grim reminder of your possible fate - some have lost their minds, others their lives. It's a loony bin prison, and your survival depends on your wits and determination.</p>
+        
+        <h3>Part Two: Alien Abduction</h3>
+        <p>Just when you thought things couldn't get stranger, you're abducted by a UFO! Your consciousness is transferred into an alien body, leaving you disoriented and far from home. Now, you must navigate this alien environment, find a way to make the UFO land back on Earth, and return to your original body. Your ultimate goal: escape back to Earth and regain your human form.</p>
+        
+        <h2>Screenshots</h2>
+        <div class="screenshots">
+            <div class="screenshot">
+                <img src="images/hostel1.png" alt="The Mental Hostel">
+                <p>The Mental Hostel</p>
+            </div>
+            <div class="screenshot">
+                <img src="images/ufo1.png" alt="Alien Abduction">
+                <p>Alien Abduction</p>
+            </div>
+            <div class="screenshot">
+                <img src="images/credits.png" alt="Ending Credits">
+                <p>Text Adventure Interface</p>
+            </div>
+            <div class="screenshot">
+                <img src="images/ufo2.png" alt="consciousness Transferring">
+                <p>UFO Interior</p>
+            </div>
+        </div>
+        
+        <h2>How to Play</h2>
         <ol>
-            <li>Click the "Play THE HOSTEL on Archive.org" button above.</li>
+            <li>Click the "Play THE HOSTEL on Archive.org" button at the top of this page.</li>
             <li>On the Archive.org page, click the "Play" button to start the emulator.</li>
             <li>Once the emulator loads, you can use your keyboard to interact with the game.</li>
             <li>To exit fullscreen or return to this page, use your browser's back button.</li>
