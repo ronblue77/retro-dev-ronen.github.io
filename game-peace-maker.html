@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SND7HY2QQ5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-SND7HY2QQ5');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peace Maker - Retro Dev Ronen</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #000;
+            color: #0f0;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 2px solid #0f0;
+            padding: 20px;
+        }
+        h1 {
+            color: #0ff;
+            text-align: center;
+        }
+        .blink {
+            animation: blinker 1s linear infinite;
+        }
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+        .game-description {
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+        .screenshots {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .screenshot {
+            border: 1px solid #0f0;
+            padding: 10px;
+            text-align: center;
+        }
+        .screenshot img {
+            max-width: 100%;
+            height: auto;
+        }
+        .game-embed {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #0f0;
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            background-color: #0ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><span class="blink">Peace Maker</span></h1>
+        
+        <div class="game-description">
+            <p>Welcome to "Peace Maker", a FreeBASIC for DOS game that puts you in the role of a divine peacekeeper!</p>
+            <p>In this unique game, you are an angel of peace sent down to Earth by God with a crucial mission: to bring peace to our troubled world in the early 21st century. With divine powers at your disposal and the ability to influence global and regional events, can you succeed in your heavenly task?</p>
+            <p>Use your angelic abilities to affect world events, guide leaders, and inspire humanity towards harmony. Remember, you've got God on your side as you navigate the complex landscape of international relations and conflict resolution.</p>
+            <p>Are you ready to spread your wings and become the ultimate Peace Maker?</p>
+        </div>
+        
+        <div class="screenshots">
+            <div class="screenshot">
+                <img src="images/peace1.png" alt="Peace Maker Screenshot 1">
+                <p>Screenshot 1: Game Title Screen</p>
+            </div>
+            <div class="screenshot">
+                <img src="images/peace2.png" alt="Peace Maker Screenshot 2">
+                <p>Screenshot 2: Gameplay</p>
+            </div>
+        </div>
+        
+        <div class="game-embed">
+            <iframe src="https://archive.org/embed/peace_202409" width="560" height="384" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
+        </div>
+        
+        <a href="index.html" class="back-link">Back to Retro Dev Ronen</a>
+    </div>
+</body>
+</html>
