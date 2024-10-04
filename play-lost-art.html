@@ -30,11 +30,15 @@
     <div id="dosbox-container"></div>
 
     <script>
+        // Initialize js-dos and mount the zip
         Dos(document.getElementById("dosbox-container"), { wdosboxUrl: "js-dos/emulators/wdosbox.js" })
             .ready(function (fs, main) {
-                // Extract the game ZIP and run the batch file
-                fs.extract("/PROGGAME.zip", "/PROGGAME").then(function () {
-                    main(["-c", "mount c /PROGGAME", "-c", "c:", "-c", "START.BAT", "-c", "exit"]);
+                // Extract the game ZIP to /game
+                fs.extract("PROGGAME.zip", "/game").then(function () {
+                    // Mount /game as C: and check contents before launching
+                    main(["-c", "mount c /game", "-c", "c:", "-c", "dir", "-c", "START.BAT", "-c", "exit"]);
+                }).catch(function(error) {
+                    console.error("Error extracting game: ", error);
                 });
             });
     </script>
