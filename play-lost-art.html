@@ -3,44 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Lost Art (of Programming)</title>
-    <script src="js-dos/js-dos.js"></script> <!-- Path to js-dos library -->
-    <style>
-        body {
-            font-family: 'Courier New', monospace;
-            background-color: #000;
-            color: #0f0;
-            text-align: center;
-            padding: 20px;
-        }
-        #dosbox-container {
-            width: 640px;
-            height: 480px;
-            margin: 20px auto;
-            border: 1px solid #0f0;
-        }
-        h1 {
-            color: #0ff;
-        }
-    </style>
+    <title>Run PROGGAME</title>
+    <link rel="stylesheet" href="/js-dos/js-dos.css">
+    <script src="/js-dos/js-dos.js"></script>
 </head>
 <body>
-    <h1>The Lost Art (of Programming)</h1>
-    <p>Enjoy this classic retro GW-BASIC game!</p>
-    <div id="dosbox-container"></div>
-
+    <div id="dos"></div>
     <script>
-        // Initialize js-dos and mount the zip
-        Dos(document.getElementById("dosbox-container"), { wdosboxUrl: "js-dos\emulators\wdosbox.js" })
-            .ready(function (fs, main) {
-                // Extract the game ZIP to /game
-                fs.extract("PROGGAME.jsdos", "/PROGGAME").then(function () {
-                    // Mount /game/PROGGAME as C: and run the game from there
-                    main(["-c", "START.BAT", "-c", "exit"]);
-                }).catch(function(error) {
-                    console.error("Error extracting game: ", error);
-                });
-            });
+        Dos(document.getElementById("dos"), {
+            wdosboxUrl: "/js-dos/",
+            url: "./PROGGAME.jsdos"
+        }).then((ci) => {
+            ci.run();
+        });
     </script>
 </body>
 </html>
