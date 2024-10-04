@@ -31,12 +31,12 @@
 
     <script>
         // Initialize js-dos and mount the zip
-        Dos(document.getElementById("dosbox-container"), { wdosboxUrl: "js-dos/wdosbox.js" })
+        Dos(document.getElementById("dosbox-container"), { wdosboxUrl: "js-dos\emulators\wdosbox.js" })
             .ready(function (fs, main) {
                 // Extract the game ZIP to /game
-                fs.extract("PROGGAME.zip", "/game").then(function () {
+                fs.extract("PROGGAME.jsdos", "/PROGGAME").then(function () {
                     // Mount /game/PROGGAME as C: and run the game from there
-                    main(["-c", "mount c /game/PROGGAME", "-c", "c:", "-c", "dir", "-c", "START.BAT", "-c", "exit"]);
+                    main(["-c", "START.BAT", "-c", "exit"]);
                 }).catch(function(error) {
                     console.error("Error extracting game: ", error);
                 });
