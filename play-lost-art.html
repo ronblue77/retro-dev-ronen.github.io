@@ -4,17 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Run PROGGAME</title>
-    <link rel="stylesheet" href="/js-dos/js-dos.css">
-    <script src="/js-dos/js-dos.js"></script>
+    <script src="js-dos/js-dos.js"></script>
 </head>
 <body>
-    <div id="dos"></div>
+    <div id="jsdos"></div>
+
     <script>
-        Dos(document.getElementById("dos"), {
-            wdosboxUrl: "js-dos",
-            url: "PROGGAME.jsdos"
-        }).then((ci) => {
-            ci.run();
+        Dos(document.getElementById("jsdos")).ready((fs, main) => {
+            fs.extract("PROGGAME.jsdos").then(() => {
+                main(["-c", "START.BAT"]);  // Launch START.BAT as the entry point
+            });
         });
     </script>
 </body>
