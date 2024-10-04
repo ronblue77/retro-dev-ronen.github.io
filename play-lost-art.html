@@ -31,7 +31,7 @@
 
     <script>
         // Initialize js-dos and mount the zip
-        Dos(document.getElementById("dosbox-container"), { wdosboxUrl: "js-dos/emulators/wdosbox.js" })
+        Dos(document.getElementById("dosbox-container"), { wdosboxUrl: "js-dos/wdosbox.js" })
             .ready(function (fs, main) {
                 // Extract the game ZIP to /game
                 fs.extract("PROGGAME.zip", "/game").then(function () {
