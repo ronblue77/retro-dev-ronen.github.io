@@ -30,7 +30,7 @@
     <div id="dosbox-container"></div>
 
     <script>
-        Dos(document.getElementById("dosbox-container"), { wdosboxUrl: "js-dos/js-dos.js" })
+        Dos(document.getElementById("dosbox-container"), { wdosboxUrl: "js-dos/emulators/wdosbox.js" })
             .ready(function (fs, main) {
                 // Extract the game ZIP and run the batch file
                 fs.extract("/PROGGAME.zip", "/PROGGAME").then(function () {
