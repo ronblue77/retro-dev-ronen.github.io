@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Lost Art (of Programming)</title>
+    <script src="js-dos/js-dos.js"></script> <!-- Path to js-dos library -->
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #000;
+            color: #0f0;
+            text-align: center;
+            padding: 20px;
+        }
+        #dosbox-container {
+            width: 640px;
+            height: 480px;
+            margin: 20px auto;
+            border: 1px solid #0f0;
+        }
+        h1 {
+            color: #0ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>The Lost Art (of Programming)</h1>
+    <p>Enjoy this classic retro GW-BASIC game!</p>
+    <div id="dosbox-container"></div>
+
+    <script>
+        Dos(document.getElementById("dosbox-container"), { wdosboxUrl: "js-dos/wdosbox.js" })
+            .ready(function (fs, main) {
+                // Extract the game ZIP and run the batch file
+                fs.extract("/PROGGAME.zip", "/PROGGAME").then(function () {
+                    main(["-c", "cd PROGGAME", "-c", "START.BAT", "-c", "exit"]);
+                });
+            });
+    </script>
+</body>
+</html>
