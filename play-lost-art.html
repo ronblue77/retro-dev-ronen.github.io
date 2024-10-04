@@ -11,7 +11,7 @@
 
     <script>
         Dos(document.getElementById("jsdos")).ready((fs, main) => {
-            fs.extract("PROGGAME.jsdos").then(() => {
+            fs.extract("/public/emulators/PROGGAME.jsdos").then(() => {
                 main(["-c", "START.BAT"]);  // Launch START.BAT as the entry point
             });
         });
