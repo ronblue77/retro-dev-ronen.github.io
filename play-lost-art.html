@@ -34,7 +34,7 @@
             .ready(function (fs, main) {
                 // Extract the game ZIP and run the batch file
                 fs.extract("/PROGGAME.zip", "/PROGGAME").then(function () {
-                    main(["-c", "cd PROGGAME", "-c", "START.BAT", "-c", "exit"]);
+                    main(["-c", "/PROGGAME/START.BAT", "-c", "exit"]);
                 });
             });
     </script>
