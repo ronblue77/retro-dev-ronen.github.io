@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Lost Art (of Programming)</title>
-    <script src="js-dos/js-dos.js"></script>
+    <script src="js-dos/js-dos.js"></script> <!-- Path to js-dos library -->
     <style>
         body {
             font-family: 'Courier New', monospace;
@@ -30,28 +30,17 @@
     <div id="dosbox-container"></div>
 
     <script>
-        const dosboxContainer = document.getElementById("dosbox-container");
-        
-        // Initialize js-dos
-        Dos(dosboxContainer, {
-            wdosboxUrl: "js-dos/emulators/wdosbox.js"
-        }).then((ci) => {
-            console.log("DOS initialized, loading game...");
-            return ci.fs.extract("PROGGAME.zip");
-        }).then(() => {
-            console.log("Game extracted, mounting and running...");
-            return ci.mount("PROGGAME.zip", "c");
-        }).then(() => {
-            console.log("Game mounted, attempting to run START.BAS...");
-            return ci.run([
-                "c:",
-                "cd PROGGAME",
-                "START.BAT"
-            ]);
-        }).catch((error) => {
-            console.error("Error:", error);
-            dosboxContainer.innerHTML = `<p style="color: red;">Error loading game: ${error.message}</p>`;
-        });
+        // Initialize js-dos and mount the zip
+        Dos(document.getElementById("dosbox-container"), { wdosboxUrl: "js-dos/emulators/wdosbox.js" })
+            .ready(function (fs, main) {
+                // Extract the game ZIP to /game
+                fs.extract("PROGGAME.zip", "/game").then(function () {
+                    // Mount /game/PROGGAME as C: and run the game from there
+                    main(["-c", "mount c /game/PROGGAME", "-c", "c:", "-c", "dir", "-c", "START.BAT", "-c", "exit"]);
+                }).catch(function(error) {
+                    console.error("Error extracting game: ", error);
+                });
+            });
     </script>
 </body>
 </html>
