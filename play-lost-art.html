@@ -29,7 +29,7 @@
             wdosboxUrl: "https://js-dos.com/6.22/current/wdosbox.js",
         }).ready((fs, main) => {
             // Fetch the PROGGAME.zip from your root directory
-            fs.extract("https://ronblue77.github.io/retro-dev-ronen.github.io/PROGGAME.zip").then(() => {
+            fs.extract("https://ronblue77.github.io/retro-dev-ronen.github.io//GAMES/PROGGAME.zip").then(() => {
                 // Start the game by running the START.BAT file
                 main(["-c","cd PROGGAME", "-c", "START.BAT", "-c", "exit"]);
             });
