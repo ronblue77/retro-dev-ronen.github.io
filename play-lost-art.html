@@ -3,17 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Run PROGGAME</title>
-    <script src="js-dos/js-dos.js"></script>
+    <title>Play Game with js-dos</title>
+    <style>
+        .dosbox-container {
+            width: 640px;
+            height: 480px;
+            border: 1px solid #000;
+        }
+    </style>
 </head>
 <body>
-    <div id="jsdos"></div>
-
+    <div id="dosbox" class="dosbox-container"></div>
+    <script src="https://js-dos.com/cdn/js-dos-api.js"></script>
     <script>
-        Dos(document.getElementById("jsdos")).ready((fs, main) => {
-            fs.extract("/public/emulators/PROGGAME.jsdos").then(() => {
-                main(["-c", "START.BAT"]);  // Launch START.BAT as the entry point
-            });
+        var dosbox = new Dosbox({
+            id: "dosbox",
+            onload: function (dosbox) {
+                dosbox.run("PTOGGAME.ZIP", "./PROGGAME").then(function() {
+                    dosbox.shell("cd PROGGAME && START.BAT");
+                });
+            },
+            onrun: function (dosbox, app) {
+                console.log("App '" + app + "' is running");
+            }
         });
     </script>
 </body>
