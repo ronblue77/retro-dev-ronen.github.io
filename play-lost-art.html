@@ -12,14 +12,19 @@
           margin: auto;
           border: 1px solid black;
       }
+      canvas {
+          display: block;
+          margin: 0 auto;
+      }
     </style>
 </head>
 <body>
     <h1>Play "The Lost Art (of Programming)"</h1>
-    <div id="dosbox"></div>
+    <!-- Add a canvas element here -->
+    <canvas id="dosbox"></canvas>
 
     <script>
-        // Initialize js-dos
+        // Initialize js-dos with the canvas element
         Dos(document.getElementById("dosbox"), {
             wdosboxUrl: "https://js-dos.com/6.22/current/wdosbox.js",
         }).ready((fs, main) => {
