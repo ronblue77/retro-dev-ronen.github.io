@@ -17,8 +17,10 @@
     <script src="https://js-dos.com/cdn/js-dos-api.js"></script>
     <script>
         Dos(document.getElementById("dosbox")).ready(function (fs, main) {
-            fs.extract("PROGGAME.ZIP", "/PROGGAME").then(function () {
-                main(["-c", "cd PROGGAME", "-c", "START.BAT"]);
+            fs.extract("PROGGAME.ZIP", "/").then(function () {
+                main(["-c", "mount c .", "-c", "c:", "-c", "cd PROGGAME", "-c", "START.BAT"]);
+            }).catch(function (error) {
+                console.error("Failed to extract ZIP file:", error);
             });
         });
     </script>
