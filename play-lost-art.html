@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Play DOS Game</title>
+    <title>Play The Lost Art (of Programming)</title>
     <script src="https://js-dos.com/6.22/current/js-dos.js"></script>
     <style>
       #dosbox {
@@ -23,8 +23,8 @@
         Dos(document.getElementById("dosbox"), {
             wdosboxUrl: "https://js-dos.com/6.22/current/wdosbox.js",
         }).ready((fs, main) => {
-            // Fetch the PROGGAME.zip from the root of your site
-            fs.extract("/PROGGAME.zip").then(() => {
+            // Fetch the PROGGAME.zip from your root directory
+            fs.extract("https://ronblue77.github.io/retro-dev-ronen.github.io/PROGGAME.zip").then(() => {
                 // Start the game by running the START.BAT file
                 main(["-c", "START.BAT"]);
             });
