@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play The Lost Art (of Programming)</title>
+    <script src="https://js-dos.com/6.22/current/js-dos.js"></script>
+    <style>
+      #dosbox {
+          width: 800px;
+          height: 600px;
+          margin: auto;
+          border: 1px solid black;
+      }
+      canvas {
+          display: block;
+          margin: 0 auto;
+      }
+    </style>
+</head>
+<body>
+    <h1>Play "The Lost Art (of Programming)"</h1>
+    <!-- Add a canvas element here -->
+    <canvas id="dosbox"></canvas>
+
+    <script>
+        // Initialize js-dos with the canvas element
+        Dos(document.getElementById("dosbox"), {
+            wdosboxUrl: "https://js-dos.com/6.22/current/wdosbox.js",
+        }).ready((fs, main) => {
+            // Fetch the PROGGAME.zip from your root directory
+            fs.extract("https://ronblue77.github.io/retro-dev-ronen.github.io/MATRIX.zip").then(() => {
+                // Start the game by running the START.BAT file
+                main(["-c","cd MATRIX", "-c", "RUN.BAT", "-c", "exit"]);
+            });
+        });
+    </script>
+</body>
+</html>
