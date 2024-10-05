@@ -16,16 +16,10 @@
     <div id="dosbox" class="dosbox-container"></div>
     <script src="https://js-dos.com/cdn/js-dos-api.js"></script>
     <script>
-        var dosbox = new Dosbox({
-            id: "dosbox",
-            onload: function (dosbox) {
-                dosbox.run("PTOGGAME.ZIP", "./PROGGAME").then(function() {
-                    dosbox.shell("cd PROGGAME && START.BAT");
-                });
-            },
-            onrun: function (dosbox, app) {
-                console.log("App '" + app + "' is running");
-            }
+        Dos(document.getElementById("dosbox")).ready(function (fs, main) {
+            fs.extract("PTOGGAME.ZIP", "/PROGGAME").then(function () {
+                main(["-c", "cd PROGGAME", "-c", "START.BAT"]);
+            });
         });
     </script>
 </body>
